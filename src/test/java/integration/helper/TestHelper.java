@@ -40,7 +40,7 @@ public class TestHelper {
 
     public Shipment createShipment() {
         Shipment shipment = new Shipment(createClient(), createClient(),
-                DeliveryType.D2D, 1.0F, 1.0F, new BigDecimal(200), new BigDecimal(30), new BigDecimal(35.2));
+                DeliveryType.D2D, new BigDecimal(30), new BigDecimal(35.2));
         return shipmentService.saveEntity(shipment);
     }
 
@@ -51,7 +51,8 @@ public class TestHelper {
     }
 
     public Client createClient() {
-        Client newClient = new Client("FOP Ivanov", "001", createAddress(), createCounterparty());
+        Client newClient = new Client("FOP Ivanov", "001",
+                createAddress(), createCounterparty());
         return clientService.saveEntity(newClient);
     }
 

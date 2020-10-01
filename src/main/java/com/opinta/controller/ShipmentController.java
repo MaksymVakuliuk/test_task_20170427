@@ -27,6 +27,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/shipments")
 public class ShipmentController {
+    public static final String NO_SHIPMENT_FOUND_FOR_ID = "No Shipment found for ID %d";
     private ShipmentService shipmentService;
     private PDFGeneratorService pdfGeneratorService;
 
@@ -46,7 +47,7 @@ public class ShipmentController {
     public ResponseEntity<?> getShipment(@PathVariable("id") long id) {
         ShipmentDto shipmentDto = shipmentService.getById(id);
         if (shipmentDto == null) {
-            return new ResponseEntity<>(format("No Shipment found for ID %d", id), NOT_FOUND);
+            return new ResponseEntity<>(format(NO_SHIPMENT_FOUND_FOR_ID, id), NOT_FOUND);
         }
         return new ResponseEntity<>(shipmentDto, OK);
     }
@@ -83,7 +84,7 @@ public class ShipmentController {
     public ResponseEntity<?> updateShipment(@PathVariable long id, @RequestBody ShipmentDto shipmentDto) {
         shipmentDto = shipmentService.update(id, shipmentDto);
         if (shipmentDto == null) {
-            return new ResponseEntity<>(format("No Shipment found for ID %d", id), NOT_FOUND);
+            return new ResponseEntity<>(format(NO_SHIPMENT_FOUND_FOR_ID, id), NOT_FOUND);
         }
         return new ResponseEntity<>(shipmentDto, OK);
     }
@@ -91,7 +92,7 @@ public class ShipmentController {
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteShipment(@PathVariable long id) {
         if (!shipmentService.delete(id)) {
-            return new ResponseEntity<>(format("No Shipment found for ID %d", id), NOT_FOUND);
+            return new ResponseEntity<>(format(NO_SHIPMENT_FOUND_FOR_ID, id), NOT_FOUND);
         }
         return new ResponseEntity<>(OK);
     }
