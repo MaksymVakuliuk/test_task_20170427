@@ -181,7 +181,7 @@ public class InitDbService {
         clients.add(new Client("Petrov PP", "002",
                 addressMapper.toEntity(addressesSaved.get(1)), counterparty));
         clients.forEach((Client client) ->
-            clientsSaved.add(this.clientMapper.toEntity(clientService.save(this.clientMapper.toDto(client))))
+                clientsSaved.add(this.clientMapper.toEntity(clientService.save(this.clientMapper.toDto(client))))
         );
 
         //create ParcelItem
