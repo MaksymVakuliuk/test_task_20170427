@@ -39,7 +39,7 @@ public class ParcelItemController {
     }
     
     @GetMapping("{id}")
-    public ResponseEntity<?> getClient(@PathVariable("id") long id) {
+    public ResponseEntity<?> getParcelItem(@PathVariable("id") long id) {
         ParcelItemDto parcelItemDto = parcelItemService.getById(id);
         if (parcelItemDto == null) {
             return new ResponseEntity<>(format(NO_PARCEL_ITEM_FOUND_FOR_ID, id), NOT_FOUND);
@@ -48,7 +48,7 @@ public class ParcelItemController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createClient(@RequestBody ParcelItemDto parcelItemDto) {
+    public ResponseEntity<?> createParcelItem(@RequestBody ParcelItemDto parcelItemDto) {
         parcelItemDto = parcelItemService.save(parcelItemDto);
         if (parcelItemDto == null) {
             return new ResponseEntity<>("New parcel item has not been saved", BAD_REQUEST);
@@ -57,7 +57,7 @@ public class ParcelItemController {
     }
     
     @PutMapping("{id}")
-    public ResponseEntity<?> updateClient(@PathVariable long id, @RequestBody ParcelItemDto parcelItemDto) {
+    public ResponseEntity<?> updateParcelItem(@PathVariable long id, @RequestBody ParcelItemDto parcelItemDto) {
         parcelItemDto = parcelItemService.update(id, parcelItemDto);
         if (parcelItemDto != null) {
             return new ResponseEntity<>(parcelItemDto, OK);
@@ -67,7 +67,7 @@ public class ParcelItemController {
     }
     
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteClient(@PathVariable long id) {
+    public ResponseEntity<?> deleteParcelItem(@PathVariable long id) {
         if (!parcelItemService.delete(id)) {
             return new ResponseEntity<>(format("No  parcel item  found for ID %d", id), NOT_FOUND);
         }
